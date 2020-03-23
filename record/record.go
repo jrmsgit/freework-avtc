@@ -3,10 +3,6 @@
 
 package record
 
-//~ import (
-//~ "time"
-//~ )
-
 type Record struct {
 	Level  string
 	TStamp int64
