@@ -4,9 +4,13 @@
 package main
 
 import (
+	"testing"
+
 	"github.com/jrmsgit/freework-avtc/record"
 )
 
-func main() {
-	record.Print()
+func BenchmarkGen(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		record.Gen()
+	}
 }

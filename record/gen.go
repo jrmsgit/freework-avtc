@@ -17,13 +17,23 @@ var logfmt = `{"level":"debug","ts":%d,"conn_id":%d,"state":"closed","Tx":%d,"Rx
 var xmax = 10000
 
 // Gen populate log file with random data
-func Gen() {
+func genlog(p bool) {
 	tsEnd := time.Now().UTC().Unix()
 	rand.Seed(tsEnd)
 
 	//~ tsStart = tsEnd - 2 // FIXME
 
 	for x := tsStart; x <= tsEnd; x++ {
-		fmt.Printf(logfmt + "\n", tsStart + x, x, rand.Intn(xmax), rand.Intn(xmax))
+		if p {
+			fmt.Printf(logfmt + "\n", tsStart + x, x, rand.Intn(xmax), rand.Intn(xmax))
+		}
 	}
+}
+
+func Gen() {
+	genlog(false)
+}
+
+func Print() {
+	genlog(true)
 }
