@@ -3,24 +3,11 @@
 
 package record
 
-import (
-	"encoding/json"
-)
-
 type Record struct {
-	Level  string
-	TStamp int64
+	Level  string `json:",omit"`
+	TStamp int64 `json:",omit"`
 	ConnId int64 `json:"conn_id"`
-	State  string
+	State  string `json:",omit"`
 	Tx     int
 	Rx     int
-}
-
-func New(blob []byte) *Record {
-	var r Record
-	err := json.Unmarshal(blob, &r)
-	if err != nil {
-		panic(err)
-	}
-	return &r
 }

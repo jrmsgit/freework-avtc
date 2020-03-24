@@ -5,6 +5,7 @@ package record
 
 import (
 	"bufio"
+	"encoding/json"
 	"fmt"
 	"os"
 
@@ -17,9 +18,6 @@ func Parse() {
 	txHist := tx.Hist()
 	rxHist := rx.Hist()
 
-	//~ tx.Hist()
-	//~ rx.Hist()
-
 	file, err := os.Open("./out/log.txt")
 	if err != nil {
 		panic(err)
@@ -29,10 +27,14 @@ func Parse() {
 	scanner := bufio.NewScanner(file)
 	scanner.Split(bufio.ScanLines)
 
-	for scanner.Scan() {
-		r := New(scanner.Bytes())
+	var r Record
 
-		//~ fmt.Printf("%d Tx: %d Rx: %d\n", r.ConnId, r.Tx, r.Rx)
+	for scanner.Scan() {
+
+		err := json.Unmarshal(scanner.Bytes(), &r)
+		if err != nil {
+			panic(err)
+		}
 
 		txHist.WithLabelValues(fmt.Sprintf("%d", r.ConnId)).Observe(float64(r.Tx))
 		rxHist.WithLabelValues(fmt.Sprintf("%d", r.ConnId)).Observe(float64(r.Rx))
