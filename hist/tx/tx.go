@@ -10,12 +10,12 @@ import (
 func Hist() *prometheus.HistogramVec {
 	return prometheus.NewHistogramVec(prometheus.HistogramOpts{
 		Name: "log_tx",
-		Help: "log tx values",
+		Help: "log tx records",
 		Buckets: []float64{
 			500,
 			1000,
 			5000,
 			9000,
 		},
-	}, []string{"tx"})
+	}, []string{"conn_id"})
 }
