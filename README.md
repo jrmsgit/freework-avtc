@@ -25,3 +25,12 @@ Tasks
 
 ts - unix time
 Please also measure the execution time for generation and parsing (separately).
+
+Implementation
+==============
+
+2. run ./gen.sh script to generate ./out/log.txt file with random data.
+
+3. run ./export.sh to populate prometheus histograms.
+
+Run ./bench.sh for benchmarks on generating the log's data and parsing it.
